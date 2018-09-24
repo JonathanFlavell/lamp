@@ -1,0 +1,41 @@
+{
+  "builders": [{
+    "type": "virtualbox-iso",
+    "boot_command": [
+      "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+    ],
+    "boot_wait": "10s",
+    "guest_os_type": "RedHat_64",
+    "headless": true,
+    "iso_url": "http://mirrors.coreix.net/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso",
+    "iso_checksum": "714acc0aefb32b7d51b515e25546835e55a90da9fb00417fbee2d03a62801efd",
+    "iso_checksum_type": "sha256",
+    "http_directory": "http",
+    "ssh_username": "vagrant",
+    "ssh_password": "vagrant",
+    "ssh_port": 22,
+    "ssh_wait_timeout": "10000s",
+    "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
+    "vm_name": "centos-7",
+    "vboxmanage": [
+      [
+        "modifyvm",
+        "{{.Name}}",
+        "--memory",
+        "512"
+      ],
+      [
+        "modifyvm",
+        "{{.Name}}",
+        "--cpus",
+        "2"
+      ]
+    ]
+  }],
+  "post-processors": [
+    {
+      "output": "builds/centos-7.box",
+      "type": "vagrant"
+    }
+  ]
+}
