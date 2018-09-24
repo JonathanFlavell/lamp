@@ -1,0 +1,5 @@
+lamp
+====
+
+Generic lamp stack.
+
