@@ -2,10 +2,13 @@ all: clean build add
 
 clean:
 	vagrant destroy -f
-	vagrant box remove centos-7
+	vagrant box remove lamp/web
+	vagrant box remove lamp/load-balancer
 
 build:
-	packer build centos-7.json
+	packer build web.json
+	packer build load-balancer.json
 
 add:
-	vagrant box add --name centos-7 builds/centos-7.box
+	vagrant box add --name lamp/web builds/web.box
+	vagrant box add --name lamp/load-balancer builds/load-balancer.box

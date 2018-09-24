@@ -16,7 +16,7 @@
     "ssh_port": 22,
     "ssh_wait_timeout": "10000s",
     "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
-    "vm_name": "centos-7",
+    "vm_name": "load-balancer",
     "vboxmanage": [
       [
         "modifyvm",
@@ -32,9 +32,16 @@
       ]
     ]
   }],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | sudo -S -E sh '{{.Path}}'",
+      "script": "scripts/shell/packer/load-balancer.sh"
+    }
+  ],
   "post-processors": [
     {
-      "output": "builds/centos-7.box",
+      "output": "builds/load-balancer.box",
       "type": "vagrant"
     }
   ]
