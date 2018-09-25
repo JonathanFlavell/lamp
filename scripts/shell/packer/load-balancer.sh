@@ -11,6 +11,12 @@ RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
 
 ProxyPreserveHost On
 
+ProxyPass "/mail-1" "http://192.168.33.111:8025"
+ProxyPassReverse "/mail-1" "http://192.168.33.111:8025"
+
+ProxyPass "/mail-2" "http://192.168.33.112:8025"
+ProxyPassReverse "/mail-2" "http://192.168.33.112:8025"
+
 <Proxy balancer://lamp>
     BalancerMember http://192.168.33.111
     BalancerMember http://192.168.33.112

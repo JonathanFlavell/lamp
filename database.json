@@ -16,7 +16,7 @@
     "ssh_port": 22,
     "ssh_wait_timeout": "10000s",
     "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
-    "vm_name": "web",
+    "vm_name": "database",
     "vboxmanage": [
       [
         "modifyvm",
@@ -41,22 +41,17 @@
     {
       "type": "shell",
       "execute_command": "echo 'vagrant' | sudo -S -E sh '{{.Path}}'",
-      "script": "scripts/shell/packer/apache.sh"
+      "script": "scripts/shell/packer/mariadb.sh"
     },
     {
       "type": "shell",
       "execute_command": "echo 'vagrant' | sudo -S -E sh '{{.Path}}'",
-      "script": "scripts/shell/packer/sendmail.sh"
-    },
-    {
-      "type": "shell",
-      "execute_command": "echo 'vagrant' | sudo -S -E sh '{{.Path}}'",
-      "script": "scripts/shell/packer/web-firewalld.sh"
+      "script": "scripts/shell/packer/database-firewalld.sh"
     }
   ],
   "post-processors": [
     {
-      "output": "builds/web.box",
+      "output": "builds/database.box",
       "type": "vagrant"
     }
   ]

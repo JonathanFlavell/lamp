@@ -3,6 +3,12 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
+  config.vm.define "sql01" do |sql01|
+    sql01.vm.box = "lamp/database"
+    sql01.vm.network :private_network, ip: "192.168.33.113"
+    sql01.ssh.forward_agent = true
+  end
+
   config.vm.define "load-balancer" do |load_balancer|
     load_balancer.vm.box = "lamp/load-balancer"
     load_balancer.vm.network :private_network, ip: "192.168.33.110"
