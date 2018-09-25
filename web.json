@@ -32,9 +32,16 @@
       ]
     ]
   }],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | sudo -S -E sh '{{.Path}}'",
+      "script": "scripts/shell/packer/base.sh"
+    }
+  ],
   "post-processors": [
     {
-      "output": "builds/centos-7.box",
+      "output": "builds/web.box",
       "type": "vagrant"
     }
   ]
