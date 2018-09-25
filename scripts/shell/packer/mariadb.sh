@@ -19,6 +19,7 @@ mysql -u root -e "DROP DATABASE test;"
 mysql -u root -e "FLUSH PRIVILEGES;"
 
 # Create user for host machines
+mysql -u root -e "CREATE USER 'root'@'192.168.33.%' IDENTIFIED BY '';"
 mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'192.168.33.%' IDENTIFIED BY '' WITH GRANT OPTION;"
 mysql -u root -e "FLUSH PRIVILEGES;"
 
